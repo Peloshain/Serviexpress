@@ -1,0 +1,27 @@
+﻿@model ServiExpress.Models.Usuario
+@{
+    ViewBag.Title = "_Login";
+}
+
+<div id="modal1" class="modal">
+@using (Html.BeginForm("Login", "Cuenta"))
+            {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="modal-content input-field">
+        <div class="editor-field input-field">
+            @Html.LabelFor(m => m.Correo)
+            @Html.TextBoxFor(m => m.Correo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Correo)
+        </div>
+        <div class="editor-field input-field">
+            @Html.LabelFor(m => m.Contraseña)
+            @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control Contraseña" })
+            @Html.ValidationMessageFor(m => m.Contraseña)
+        </div>
+        </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn">Entrar</button>
+    </div>
+    }
+</div>

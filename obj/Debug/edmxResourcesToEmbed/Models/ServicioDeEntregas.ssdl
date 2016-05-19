@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ServicioDeEntregasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbClientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Correo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="15" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="RFC" Type="varchar" MaxLength="15" />
+    <Property Name="ROL" Type="int" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbContrato">
+    <Key>
+      <PropertyRef Name="IdContrato" />
+    </Key>
+    <Property Name="IdContrato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCliente" Type="int" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="FechaInicio" Type="date" />
+    <Property Name="FechaFin" Type="date" />
+    <Property Name="tipo" Type="int" />
+  </EntityType>
+  <EntityType Name="tbEntregas">
+    <Key>
+      <PropertyRef Name="idOrden" />
+    </Key>
+    <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="idRepartidor" Type="int" Nullable="false" />
+    <Property Name="idOrden" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbEstados">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ServicioDeEntregas.dbo.tbFacturas_Recibos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="tbFacturas_Recibos">
+    <Key>
+      <PropertyRef Name="idFactura_Recibo" />
+    </Key>
+    <Property Name="idFactura_Recibo" Type="int" Nullable="false" />
+    <Property Name="idTransaccion" Type="int" />
+    <Property Name="idCliente" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="RFC" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbPagos">
+    <Key>
+      <PropertyRef Name="IdTransaccion" />
+    </Key>
+    <Property Name="IdTransaccion" Type="int" Nullable="false" />
+    <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="idcontrato" Type="int" Nullable="false" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="Vigencia" Type="date" />
+    <Property Name="NumTarjeta" Type="varchar" MaxLength="20" />
+    <Property Name="Tipotarjeta" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbRepartidor">
+    <Key>
+      <PropertyRef Name="IdRepartidor" />
+    </Key>
+    <Property Name="IdRepartidor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Correo" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="20" />
+    <Property Name="Telefono" Type="varchar" MaxLength="15" />
+    <Property Name="ROL" Type="int" />
+  </EntityType>
+  <EntityType Name="tbRoles">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbTipoContrato">
+    <Key>
+      <PropertyRef Name="IdTipoContrato" />
+    </Key>
+    <Property Name="IdTipoContrato" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="60" />
+    <Property Name="MontoMensual" Type="int" />
+  </EntityType>
+  <Association Name="FK_tbClientes_tbRoles">
+    <End Role="tbRoles" Type="Self.tbRoles" Multiplicity="0..1" />
+    <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbRoles">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="tbClientes">
+        <PropertyRef Name="ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbContrato_tbClientes1">
+    <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="0..1" />
+    <End Role="tbContrato" Type="Self.tbContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbClientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="tbContrato">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbContrato_tbTipoContrato">
+    <End Role="tbTipoContrato" Type="Self.tbTipoContrato" Multiplicity="0..1" />
+    <End Role="tbContrato" Type="Self.tbContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoContrato">
+        <PropertyRef Name="IdTipoContrato" />
+      </Principal>
+      <Dependent Role="tbContrato">
+        <PropertyRef Name="tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbEntregas_tbClientes">
+    <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="1" />
+    <End Role="tbEntregas" Type="Self.tbEntregas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbClientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="tbEntregas">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbEntregas_tbEstados">
+    <End Role="tbEstados" Type="Self.tbEstados" Multiplicity="0..1" />
+    <End Role="tbEntregas" Type="Self.tbEntregas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbEstados">
+        <PropertyRef Name="idEstado" />
+      </Principal>
+      <Dependent Role="tbEntregas">
+        <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbEntregas_tbRepartidor">
+    <End Role="tbRepartidor" Type="Self.tbRepartidor" Multiplicity="1" />
+    <End Role="tbEntregas" Type="Self.tbEntregas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbRepartidor">
+        <PropertyRef Name="IdRepartidor" />
+      </Principal>
+      <Dependent Role="tbEntregas">
+        <PropertyRef Name="idRepartidor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbFacturas_Recibos_tbPagos">
+    <End Role="tbPagos" Type="Self.tbPagos" Multiplicity="0..1" />
+    <End Role="tbFacturas_Recibos" Type="Self.tbFacturas_Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPagos">
+        <PropertyRef Name="IdTransaccion" />
+      </Principal>
+      <Dependent Role="tbFacturas_Recibos">
+        <PropertyRef Name="idTransaccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbPagos_tbContrato">
+    <End Role="tbContrato" Type="Self.tbContrato" Multiplicity="1" />
+    <End Role="tbPagos" Type="Self.tbPagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbContrato">
+        <PropertyRef Name="IdContrato" />
+      </Principal>
+      <Dependent Role="tbPagos">
+        <PropertyRef Name="idcontrato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbRepartidor_tbRoles">
+    <End Role="tbRoles" Type="Self.tbRoles" Multiplicity="0..1" />
+    <End Role="tbRepartidor" Type="Self.tbRepartidor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbRoles">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="tbRepartidor">
+        <PropertyRef Name="ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ServicioDeEntregasModelStoreContainer">
+    <EntitySet Name="tbClientes" EntityType="Self.tbClientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbContrato" EntityType="Self.tbContrato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbEntregas" EntityType="Self.tbEntregas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbEstados" EntityType="Self.tbEstados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbPagos" EntityType="Self.tbPagos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbRepartidor" EntityType="Self.tbRepartidor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbRoles" EntityType="Self.tbRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbTipoContrato" EntityType="Self.tbTipoContrato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbFacturas_Recibos" EntityType="Self.tbFacturas_Recibos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[tbFacturas_Recibos].[idFactura_Recibo] AS [idFactura_Recibo], 
+[tbFacturas_Recibos].[idTransaccion] AS [idTransaccion], 
+[tbFacturas_Recibos].[idCliente] AS [idCliente], 
+[tbFacturas_Recibos].[Nombre] AS [Nombre], 
+[tbFacturas_Recibos].[Direccion] AS [Direccion], 
+[tbFacturas_Recibos].[RFC] AS [RFC]
+FROM [dbo].[tbFacturas_Recibos] AS [tbFacturas_Recibos]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tbClientes_tbRoles" Association="Self.FK_tbClientes_tbRoles">
+      <End Role="tbRoles" EntitySet="tbRoles" />
+      <End Role="tbClientes" EntitySet="tbClientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbContrato_tbClientes1" Association="Self.FK_tbContrato_tbClientes1">
+      <End Role="tbClientes" EntitySet="tbClientes" />
+      <End Role="tbContrato" EntitySet="tbContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbContrato_tbTipoContrato" Association="Self.FK_tbContrato_tbTipoContrato">
+      <End Role="tbTipoContrato" EntitySet="tbTipoContrato" />
+      <End Role="tbContrato" EntitySet="tbContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbEntregas_tbClientes" Association="Self.FK_tbEntregas_tbClientes">
+      <End Role="tbClientes" EntitySet="tbClientes" />
+      <End Role="tbEntregas" EntitySet="tbEntregas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbEntregas_tbEstados" Association="Self.FK_tbEntregas_tbEstados">
+      <End Role="tbEstados" EntitySet="tbEstados" />
+      <End Role="tbEntregas" EntitySet="tbEntregas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbEntregas_tbRepartidor" Association="Self.FK_tbEntregas_tbRepartidor">
+      <End Role="tbRepartidor" EntitySet="tbRepartidor" />
+      <End Role="tbEntregas" EntitySet="tbEntregas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbFacturas_Recibos_tbPagos" Association="Self.FK_tbFacturas_Recibos_tbPagos">
+      <End Role="tbPagos" EntitySet="tbPagos" />
+      <End Role="tbFacturas_Recibos" EntitySet="tbFacturas_Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbPagos_tbContrato" Association="Self.FK_tbPagos_tbContrato">
+      <End Role="tbContrato" EntitySet="tbContrato" />
+      <End Role="tbPagos" EntitySet="tbPagos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbRepartidor_tbRoles" Association="Self.FK_tbRepartidor_tbRoles">
+      <End Role="tbRoles" EntitySet="tbRoles" />
+      <End Role="tbRepartidor" EntitySet="tbRepartidor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

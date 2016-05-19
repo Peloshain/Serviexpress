@@ -1,0 +1,115 @@
+﻿@model ServiExpress.Models.tbContrato
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Contrato", FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+
+
+        <div class="modal-content input-field">
+
+
+            <div class="input-field col s12">
+
+                @Html.DropDownListFor(model => model.tipo, (SelectList)ViewBag.TipoContrato, "Selecciona", new { @class = "initialized tipo element-required" })
+                @Html.Label("Tipo de contrato")
+                @Html.ValidationMessageFor(model => model.tbTipoContrato)
+            </div>
+            <div class="editor-field input-field">
+                @Html.Label("Descripcion")
+            </div>
+            <div class="editor-field input-field" id="disabled">
+                @Html.TextArea("Descripcion")
+            </div>
+            <div class="editor-field input-field">
+                @Html.Label("Monto a pagar")
+            </div>
+            <div class="editor-field input-field">
+                @Html.TextArea("MontoMensual")
+            </div>
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.FechaInicio)
+                @Html.TextBoxFor(model => model.FechaInicio)
+                @Html.ValidationMessageFor(model => model.FechaInicio)
+            </div>
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.FechaFin)
+                @Html.TextBoxFor(model => model.FechaFin)
+                @Html.ValidationMessageFor(model => model.FechaFin)
+            </div>
+
+
+                <input type="submit" value="Create" />
+            </div>
+
+
+
+}
+
+<script>
+
+    $(document).ready(function () {
+        $('#tipo').material_select();
+        $(".tipo").children("input").attr("name", "tipos");
+        $(".tipo").children("input").attr("id", "tipos");
+
+        $("#FechaInicio").blur(function () {
+            
+            if ($(this).val().length ==10) {
+                $.ajax({
+                    url: '@Url.Action("AgregarMes", "Contrato")',
+                    dataType: "json",
+                    data: {
+                        sfecha: $('#FechaInicio').val()
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#FechaFin").val(data);
+                    },
+                    error: function (error) {
+                        alert(error.responseText);
+                    }
+                });
+            } 
+        });
+
+
+        $("#tipo").change(function () {
+            
+            if ($(this).val().length > 0) {
+                $.ajax({
+                    url: '@Url.Action("ObtenerContrato", "Contrato")',
+                    dataType: "json",
+                    data: {
+                        term: $('#tipo').val()
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#Descripcion").val(data.Descripcion);
+                        $("#MontoMensual").val(data.MontoMensual);
+                        $("#Monto").val(data.MontoMensual);
+                        //alert(data.Descripcion+ " "+ data.MontoMensual)
+                    },
+                    error: function (error) {
+                        alert(error.responseText);
+                    }
+                });
+            }else{
+                $("#Descripcion").val("");
+                $("#Monto").val("")
+            }
+        });
+    });
+
+    
+    
+</script>

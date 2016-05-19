@@ -1,0 +1,201 @@
+﻿@using Microsoft.AspNet.Identity
+@using ServiExpress.Servicios;
+@using ServiExpress.Models;
+@{
+    ClienteServicio ClienteServicio = new ClienteServicio(); 
+    if (Request.IsAuthenticated)
+    {
+        Session["Rol"] = ClienteServicio.ObtenerPorCorreo(User.Identity.Name).tbRoles.Nombre;
+    }
+}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Mi aplicación ASP.NET MVC</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <style>
+            select{
+                /*display:block;*/
+            }
+        </style>
+    </head>
+    <body>
+        <header style="height:600px">
+            @if(!Request.IsAuthenticated)
+            { 
+                
+              <nav>
+                <div class="nav-wrapper">
+                  <a href="#!" class="brand-logo">Logo</a>
+                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                  <ul class="right hide-on-med-and-down">
+                      <li>
+                          <a class="waves-effect waves-light  modal-trigger" href="#modal1">Iniciar Sesion</a>
+                      </li>
+                      <li>
+                          <a class="waves-effect waves-light modal-trigger" href="#modalRegistro">Registrarse</a>
+                      </li>
+
+                  </ul>
+                  <ul class="side-nav" id="mobile-demo">
+                      <li>
+                          <a class="waves-effect waves-light  modal-trigger" href="#modal1">Iniciar Sesion</a>
+                      </li>
+                      <li>
+                          <a class="waves-effect waves-light modal-trigger" href="#modalRegistro">Registrarse</a>
+                      </li>
+
+                  </ul>
+                </div>
+              </nav>
+
+            }
+            <main>
+                @{
+                    
+                }
+                @if(!Request.IsAuthenticated)
+                { 
+                    @Html.Partial("_ContenidoSlides")
+                }
+                
+                @if (Request.IsAuthenticated)
+                {
+                    
+                    if (Session["Rol"]!=null && Session["Rol"].ToString().Equals("Cliente"))
+                    {
+                        <nav>
+                                  <div class="nav-wrapper">
+                                  <a href="#!" class="brand-logo center">Logo</a>
+                                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                                  <ul class="right hide-on-med-and-down">
+                                      <li>
+
+                                          @Html.ActionLink("Administrar", "Index", "Cliente", null, new { @class = "waves-effect waves-light" })
+                                      </li>
+                                      <li>
+                                          <a class="waves-effect waves-light " href="#">Monitoreo</a>
+                                      </li>
+                                      <li>
+                                          <a class="waves-effect waves-light" href="#">Solicitar entrega</a>
+                                      </li>
+                                      <li>
+                                          @Html.ActionLink("Salir", "LogOut", "Cuenta", null, new { @class = "waves-effect waves-light" })
+                                      </li>
+
+                                  </ul>
+                                  <ul class="side-nav" id="mobile-demo">
+                                      <li>
+
+                                          @Html.ActionLink("Administrar", "Index", "Cliente", null, new { @class = "waves-effect waves-light" })
+                                      </li>
+                                      <li>
+                                          <a class="waves-effect waves-light " href="#">Monitoreo</a>
+                                      </li>
+                                      <li>
+                                          <a class="waves-effect waves-light" href="#">Solicitar entrega</a>
+                                      </li>
+                                      <li>
+                                          @Html.ActionLink("Salir", "LogOut", "Cuenta", null, new { @class = "waves-effect waves-light" })
+                                      </li>
+
+                                  </ul>
+                                </div>
+                        </nav>
+  
+
+                        
+                        
+                    }
+
+                    else if (Session["Rol"] != null && Session["Rol"].ToString().Equals("Repartidor"))
+                    {
+                        <nav>
+                                  <div class="nav-wrapper">
+                                  <a href="#!" class="brand-logo center">Logo</a>
+                                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                                  <ul class="right hide-on-med-and-down">
+                                      <li>
+                                          @Html.ActionLink("Salir", "LogOut", "Cuenta", null, new { @class = "waves-effect waves-light" })
+                                      </li>
+                                  </ul>
+                                  <ul class="side-nav" id="mobile-demo">
+                                      <li>
+                                          @Html.ActionLink("Salir", "LogOut", "Cuenta", null, new { @class = "waves-effect waves-light" })
+                                      </li>
+                                  </ul>
+                                </div>
+                        </nav>  
+
+                        
+                    }
+                    
+                }
+                @RenderSection("featured", required: false)
+            </main>
+            @RenderBody()
+
+
+            @*@if (Request.IsAuthenticated)
+            {
+               @Html.ActionLink("Salir", "LogOut", "Cuenta", null, new { @class = "waves-effect waves-light" })
+               @Html.ActionLink("Salir", "Edit", "Cuenta", new { id = 1 }, new { @class = "waves-effect waves-light btn" })
+            }*@
+
+        </header>
+        <footer class=" page-footer">
+            <div class="footer-copyright">
+                <div class="container">
+                    <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET MVC</p>
+                </div>
+            </div>
+        </footer>
+
+            
+
+
+
+@if (!Request.IsAuthenticated)
+{
+    @Html.Partial("_Login")
+    @Html.Partial("../Cliente/Create")
+}
+else
+{
+    @Html.Partial("_LogOut")
+}
+
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+                $('.modal-trigger').leanModal();
+            });
+
+            $(document).ready(function () {
+                $('.slider').slider({
+                    full_width: true
+                });
+            });
+
+            $(".button-collapse").sideNav();
+
+        </script>
+
+
+
+    </body>
+</html>

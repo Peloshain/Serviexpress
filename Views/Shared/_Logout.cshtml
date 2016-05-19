@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "_LogOut";
+}
+
+<div class="modal fade" id="modalLogin" style="display: @ViewBag.Block; margin-top:100px">
+    <div class="modal-dialog ">
+        <div class="modal-content" style="width:67%;margin-left: auto;margin-right: auto;">
+            <form action="/Cuenta/LogOut" method="post">
+                <input name="__RequestVerificationToken" type="hidden" value="">
+                <div class="modal-header naranjaFooter" style="padding-left: 15px; padding-top: 15px; padding-bottom: 20px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="text-center"><strong style="color: white" class="text-center">Cerrar Sesión</strong></h4>
+                </div>
+                <div class="modal-body" style="padding-top: 13px; padding-bottom: 13px">
+                    <fieldset>
+                        <h5 class="text-center">¿Esta seguro que desea salir?</h5>
+                    </fieldset>
+                </div>
+                <div class="modal-footer" style="padding: 5px">
+
+                    <button type="submit" class="btn  btn-danger">Si</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

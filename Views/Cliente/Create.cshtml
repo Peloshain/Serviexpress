@@ -1,0 +1,138 @@
+﻿@model ServiExpress.Models.tbClientes
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "Cliente", FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+ <div id="modalRegistro" class="modal">
+
+
+    <div class="modal-content input-field">
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.Nombre)
+                @Html.TextBoxFor(model => model.Nombre)
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.Telefono)
+                @Html.TextBoxFor(model => model.Telefono)
+                @Html.ValidationMessageFor(model => model.Telefono)
+            </div>
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.Direccion)
+                @Html.TextBoxFor(model => model.Direccion)
+                @Html.ValidationMessageFor(model => model.Direccion)
+            </div>
+
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.Correo)
+                @Html.TextBoxFor(model => model.Correo)
+                @Html.ValidationMessageFor(model => model.Correo)
+            </div>
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.Contraseña)
+                @Html.TextBoxFor(model => model.Contraseña)
+                @Html.ValidationMessageFor(model => model.Contraseña)
+            </div>
+
+            <div class="editor-field input-field">
+                @Html.LabelFor(model => model.RFC)
+                @Html.TextBoxFor(model => model.RFC)
+                @Html.ValidationMessageFor(model => model.RFC)
+            </div>
+            <input type="submit" value="Create" />
+        </div>
+     
+
+       
+
+</div>
+
+}
+
+                
+
+                @*<fieldset>
+
+
+                    <div class="editor-field input-field">
+                        @Html.LabelFor(model => model.IdCliente)
+                        @Html.TextBoxFor(model => model.IdCliente, new {  @class="validate" })
+                        @Html.ValidationMessageFor(model => model.IdCliente)
+                    </div>
+
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Nombre)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Nombre)
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Telefono)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Telefono)
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Direccion)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Direccion)
+                        @Html.ValidationMessageFor(model => model.Direccion)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Correo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Correo)
+                        @Html.ValidationMessageFor(model => model.Correo)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Contraseña)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Contraseña)
+                        @Html.ValidationMessageFor(model => model.Contraseña)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.RFC)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.RFC)
+                        @Html.ValidationMessageFor(model => model.RFC)
+                    </div>
+
+                    <p>
+                        <input type="submit" value="Create" />
+                    </p>
+                </fieldset>
+
+                    }
+                *@
+
+
+                @*<div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+                *@

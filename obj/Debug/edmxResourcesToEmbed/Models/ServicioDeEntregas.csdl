@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ServicioDeEntregasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ServicioDeEntregasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbClientes" EntityType="ServicioDeEntregasModel.tbClientes" />
+    <EntitySet Name="tbContrato" EntityType="ServicioDeEntregasModel.tbContrato" />
+    <EntitySet Name="tbEntregas" EntityType="ServicioDeEntregasModel.tbEntregas" />
+    <EntitySet Name="tbEstados" EntityType="ServicioDeEntregasModel.tbEstados" />
+    <EntitySet Name="tbPagos" EntityType="ServicioDeEntregasModel.tbPagos" />
+    <EntitySet Name="tbRepartidor" EntityType="ServicioDeEntregasModel.tbRepartidor" />
+    <EntitySet Name="tbRoles" EntityType="ServicioDeEntregasModel.tbRoles" />
+    <EntitySet Name="tbTipoContrato" EntityType="ServicioDeEntregasModel.tbTipoContrato" />
+    <EntitySet Name="tbFacturas_Recibos" EntityType="ServicioDeEntregasModel.tbFacturas_Recibos" />
+    <AssociationSet Name="FK_tbClientes_tbRoles" Association="ServicioDeEntregasModel.FK_tbClientes_tbRoles">
+      <End Role="tbRoles" EntitySet="tbRoles" />
+      <End Role="tbClientes" EntitySet="tbClientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbContrato_tbClientes1" Association="ServicioDeEntregasModel.FK_tbContrato_tbClientes1">
+      <End Role="tbClientes" EntitySet="tbClientes" />
+      <End Role="tbContrato" EntitySet="tbContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbEntregas_tbClientes" Association="ServicioDeEntregasModel.FK_tbEntregas_tbClientes">
+      <End Role="tbClientes" EntitySet="tbClientes" />
+      <End Role="tbEntregas" EntitySet="tbEntregas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbContrato_tbTipoContrato" Association="ServicioDeEntregasModel.FK_tbContrato_tbTipoContrato">
+      <End Role="tbTipoContrato" EntitySet="tbTipoContrato" />
+      <End Role="tbContrato" EntitySet="tbContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbPagos_tbContrato" Association="ServicioDeEntregasModel.FK_tbPagos_tbContrato">
+      <End Role="tbContrato" EntitySet="tbContrato" />
+      <End Role="tbPagos" EntitySet="tbPagos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbEntregas_tbEstados" Association="ServicioDeEntregasModel.FK_tbEntregas_tbEstados">
+      <End Role="tbEstados" EntitySet="tbEstados" />
+      <End Role="tbEntregas" EntitySet="tbEntregas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbEntregas_tbRepartidor" Association="ServicioDeEntregasModel.FK_tbEntregas_tbRepartidor">
+      <End Role="tbRepartidor" EntitySet="tbRepartidor" />
+      <End Role="tbEntregas" EntitySet="tbEntregas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbFacturas_Recibos_tbPagos" Association="ServicioDeEntregasModel.FK_tbFacturas_Recibos_tbPagos">
+      <End Role="tbPagos" EntitySet="tbPagos" />
+      <End Role="tbFacturas_Recibos" EntitySet="tbFacturas_Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbRepartidor_tbRoles" Association="ServicioDeEntregasModel.FK_tbRepartidor_tbRoles">
+      <End Role="tbRoles" EntitySet="tbRoles" />
+      <End Role="tbRepartidor" EntitySet="tbRepartidor" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbClientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RFC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ROL" Type="Int32" />
+    <Property Name="Contraseña" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbRoles" Relationship="ServicioDeEntregasModel.FK_tbClientes_tbRoles" FromRole="tbClientes" ToRole="tbRoles" />
+    <NavigationProperty Name="tbContrato" Relationship="ServicioDeEntregasModel.FK_tbContrato_tbClientes1" FromRole="tbClientes" ToRole="tbContrato" />
+    <NavigationProperty Name="tbEntregas" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbClientes" FromRole="tbClientes" ToRole="tbEntregas" />
+  </EntityType>
+  <EntityType Name="tbContrato">
+    <Key>
+      <PropertyRef Name="IdContrato" />
+    </Key>
+    <Property Name="IdContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCliente" Type="Int32" />
+    <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+    <Property Name="FechaFin" Type="DateTime" Precision="0" />
+    <Property Name="tipo" Type="Int32" />
+    <NavigationProperty Name="tbClientes" Relationship="ServicioDeEntregasModel.FK_tbContrato_tbClientes1" FromRole="tbContrato" ToRole="tbClientes" />
+    <NavigationProperty Name="tbTipoContrato" Relationship="ServicioDeEntregasModel.FK_tbContrato_tbTipoContrato" FromRole="tbContrato" ToRole="tbTipoContrato" />
+    <NavigationProperty Name="tbPagos" Relationship="ServicioDeEntregasModel.FK_tbPagos_tbContrato" FromRole="tbContrato" ToRole="tbPagos" />
+  </EntityType>
+  <EntityType Name="tbEntregas">
+    <Key>
+      <PropertyRef Name="idOrden" />
+    </Key>
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="idRepartidor" Type="Int32" Nullable="false" />
+    <Property Name="idOrden" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbClientes" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbClientes" FromRole="tbEntregas" ToRole="tbClientes" />
+    <NavigationProperty Name="tbEstados" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbEstados" FromRole="tbEntregas" ToRole="tbEstados" />
+    <NavigationProperty Name="tbRepartidor" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbRepartidor" FromRole="tbEntregas" ToRole="tbRepartidor" />
+  </EntityType>
+  <EntityType Name="tbEstados">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbEntregas" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbEstados" FromRole="tbEstados" ToRole="tbEntregas" />
+  </EntityType>
+  <EntityType Name="tbPagos">
+    <Key>
+      <PropertyRef Name="IdTransaccion" />
+    </Key>
+    <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="idcontrato" Type="Int32" Nullable="false" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="Vigencia" Type="DateTime" Precision="0" />
+    <Property Name="NumTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Tipotarjeta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbContrato" Relationship="ServicioDeEntregasModel.FK_tbPagos_tbContrato" FromRole="tbPagos" ToRole="tbContrato" />
+    <NavigationProperty Name="tbFacturas_Recibos" Relationship="ServicioDeEntregasModel.FK_tbFacturas_Recibos_tbPagos" FromRole="tbPagos" ToRole="tbFacturas_Recibos" />
+  </EntityType>
+  <EntityType Name="tbRepartidor">
+    <Key>
+      <PropertyRef Name="IdRepartidor" />
+    </Key>
+    <Property Name="IdRepartidor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ROL" Type="Int32" />
+    <NavigationProperty Name="tbEntregas" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbRepartidor" FromRole="tbRepartidor" ToRole="tbEntregas" />
+    <NavigationProperty Name="tbRoles" Relationship="ServicioDeEntregasModel.FK_tbRepartidor_tbRoles" FromRole="tbRepartidor" ToRole="tbRoles" />
+  </EntityType>
+  <EntityType Name="tbRoles">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbClientes" Relationship="ServicioDeEntregasModel.FK_tbClientes_tbRoles" FromRole="tbRoles" ToRole="tbClientes" />
+    <NavigationProperty Name="tbRepartidor" Relationship="ServicioDeEntregasModel.FK_tbRepartidor_tbRoles" FromRole="tbRoles" ToRole="tbRepartidor" />
+  </EntityType>
+  <EntityType Name="tbTipoContrato">
+    <Key>
+      <PropertyRef Name="IdTipoContrato" />
+    </Key>
+    <Property Name="IdTipoContrato" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="MontoMensual" Type="Int32" />
+    <NavigationProperty Name="tbContrato" Relationship="ServicioDeEntregasModel.FK_tbContrato_tbTipoContrato" FromRole="tbTipoContrato" ToRole="tbContrato" />
+  </EntityType>
+  <EntityType Name="tbFacturas_Recibos">
+    <Key>
+      <PropertyRef Name="idFactura_Recibo" />
+    </Key>
+    <Property Name="idFactura_Recibo" Type="Int32" Nullable="false" />
+    <Property Name="idTransaccion" Type="Int32" />
+    <Property Name="idCliente" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RFC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="tbPagos" Relationship="ServicioDeEntregasModel.FK_tbFacturas_Recibos_tbPagos" FromRole="tbFacturas_Recibos" ToRole="tbPagos" />
+  </EntityType>
+  <Association Name="FK_tbClientes_tbRoles">
+    <End Type="ServicioDeEntregasModel.tbRoles" Role="tbRoles" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbClientes" Role="tbClientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbRoles">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="tbClientes">
+        <PropertyRef Name="ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbContrato_tbClientes1">
+    <End Type="ServicioDeEntregasModel.tbClientes" Role="tbClientes" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbContrato" Role="tbContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbClientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="tbContrato">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbEntregas_tbClientes">
+    <End Type="ServicioDeEntregasModel.tbClientes" Role="tbClientes" Multiplicity="1" />
+    <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbClientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="tbEntregas">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbContrato_tbTipoContrato">
+    <End Type="ServicioDeEntregasModel.tbTipoContrato" Role="tbTipoContrato" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbContrato" Role="tbContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoContrato">
+        <PropertyRef Name="IdTipoContrato" />
+      </Principal>
+      <Dependent Role="tbContrato">
+        <PropertyRef Name="tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbPagos_tbContrato">
+    <End Type="ServicioDeEntregasModel.tbContrato" Role="tbContrato" Multiplicity="1" />
+    <End Type="ServicioDeEntregasModel.tbPagos" Role="tbPagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbContrato">
+        <PropertyRef Name="IdContrato" />
+      </Principal>
+      <Dependent Role="tbPagos">
+        <PropertyRef Name="idcontrato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbEntregas_tbEstados">
+    <End Type="ServicioDeEntregasModel.tbEstados" Role="tbEstados" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbEstados">
+        <PropertyRef Name="idEstado" />
+      </Principal>
+      <Dependent Role="tbEntregas">
+        <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbEntregas_tbRepartidor">
+    <End Type="ServicioDeEntregasModel.tbRepartidor" Role="tbRepartidor" Multiplicity="1" />
+    <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbRepartidor">
+        <PropertyRef Name="IdRepartidor" />
+      </Principal>
+      <Dependent Role="tbEntregas">
+        <PropertyRef Name="idRepartidor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbFacturas_Recibos_tbPagos">
+    <End Type="ServicioDeEntregasModel.tbPagos" Role="tbPagos" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbFacturas_Recibos" Role="tbFacturas_Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPagos">
+        <PropertyRef Name="IdTransaccion" />
+      </Principal>
+      <Dependent Role="tbFacturas_Recibos">
+        <PropertyRef Name="idTransaccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbRepartidor_tbRoles">
+    <End Type="ServicioDeEntregasModel.tbRoles" Role="tbRoles" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbRepartidor" Role="tbRepartidor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbRoles">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="tbRepartidor">
+        <PropertyRef Name="ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

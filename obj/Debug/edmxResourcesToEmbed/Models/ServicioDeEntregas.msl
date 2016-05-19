@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ServicioDeEntregasModelStoreContainer" CdmEntityContainer="ServicioDeEntregasEntities">
+    <EntitySetMapping Name="tbClientes">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbClientes">
+        <MappingFragment StoreEntitySet="tbClientes">
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="ROL" ColumnName="ROL" />
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbContrato">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbContrato">
+        <MappingFragment StoreEntitySet="tbContrato">
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbEntregas">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbEntregas">
+        <MappingFragment StoreEntitySet="tbEntregas">
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="idRepartidor" ColumnName="idRepartidor" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbEstados">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbEstados">
+        <MappingFragment StoreEntitySet="tbEstados">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbPagos">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbPagos">
+        <MappingFragment StoreEntitySet="tbPagos">
+          <ScalarProperty Name="Tipotarjeta" ColumnName="Tipotarjeta" />
+          <ScalarProperty Name="NumTarjeta" ColumnName="NumTarjeta" />
+          <ScalarProperty Name="Vigencia" ColumnName="Vigencia" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="idcontrato" ColumnName="idcontrato" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbRepartidor">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbRepartidor">
+        <MappingFragment StoreEntitySet="tbRepartidor">
+          <ScalarProperty Name="ROL" ColumnName="ROL" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdRepartidor" ColumnName="IdRepartidor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbRoles">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbRoles">
+        <MappingFragment StoreEntitySet="tbRoles">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbTipoContrato">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbTipoContrato">
+        <MappingFragment StoreEntitySet="tbTipoContrato">
+          <ScalarProperty Name="MontoMensual" ColumnName="MontoMensual" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbFacturas_Recibos">
+      <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbFacturas_Recibos">
+        <MappingFragment StoreEntitySet="tbFacturas_Recibos">
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
+          <ScalarProperty Name="idFactura_Recibo" ColumnName="idFactura_Recibo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

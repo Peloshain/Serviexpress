@@ -1,0 +1,51 @@
+﻿@model ServiExpress.Models.tbPagos
+@using ServiExpress.Models;
+
+@{
+    ViewBag.Title = "Create";
+    tbContrato contrato = ViewBag.Contrato;
+   
+}
+
+
+@using (Html.BeginForm("Create", "Pago", FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<div class="editor-field input-field">
+    @Html.Label("Contrato")
+    <input type="text" value="@contrato.IdContrato" disabled />
+    <input type="hidden" value="@contrato.IdContrato" />
+</div>
+
+<div class="editor-field input-field">
+    @Html.Label("Monto")
+    <input type="text" value="@contrato.Monto" disabled />
+    <input type="hidden" value="@contrato.Monto" />
+</div>
+
+<div class="editor-field input-field">
+    @Html.Label("Numero de tarjeta")
+    @Html.TextBoxFor(model => model.NumTarjeta)
+    @Html.ValidationMessageFor(model => model.NumTarjeta)
+</div>
+
+<div class="editor-field input-field">
+    @Html.Label("Tipo de tarjeta")
+    @Html.TextBoxFor(model => model.Tipotarjeta)
+    @Html.ValidationMessageFor(model => model.Tipotarjeta)
+</div>
+
+<div class="editor-field input-field">
+    @Html.Label("Vigencia")
+    @Html.TextBoxFor(model => model.Vigencia)
+    @Html.ValidationMessageFor(model => model.Vigencia)
+</div>
+
+<input type="submit" value="Create" />
+@*<label>@contrato.IdContrato</label>
+<label>@contrato.Monto</label>
+<input type="text" value="@contrato.Monto" disabled/>
+<input type="hidden" value="@contrato.Monto"/>*@
+}
