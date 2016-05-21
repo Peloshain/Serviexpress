@@ -34,13 +34,14 @@
           <Key>
             <PropertyRef Name="idOrden" />
           </Key>
-          <Property Name="idCliente" Type="int" Nullable="false" />
-          <Property Name="idRepartidor" Type="int" Nullable="false" />
           <Property Name="idOrden" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Direccion" Type="varchar" MaxLength="50" />
-          <Property Name="Estado" Type="int" />
-          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idRepartidor" Type="int" />
+          <Property Name="NombreConsumidor" Type="varchar" MaxLength="50" />
+          <Property Name="DireccionConsumidor" Type="varchar" MaxLength="100" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="TelefonoConsumidor" Type="varchar" MaxLength="20" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tbEstados">
           <Key>
@@ -66,13 +67,13 @@ advertencia 6002: La tabla o vista 'ServicioDeEntregas.dbo.tbFacturas_Recibos' n
           <Key>
             <PropertyRef Name="IdTransaccion" />
           </Key>
-          <Property Name="IdTransaccion" Type="int" Nullable="false" />
+          <Property Name="IdTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idCliente" Type="int" Nullable="false" />
           <Property Name="idcontrato" Type="int" Nullable="false" />
           <Property Name="Monto" Type="int" />
           <Property Name="Vigencia" Type="date" />
-          <Property Name="NumTarjeta" Type="varchar" MaxLength="20" />
-          <Property Name="Tipotarjeta" Type="varchar" MaxLength="10" />
+          <Property Name="NumTarjeta" Type="varchar" MaxLength="50" />
+          <Property Name="Tipotarjeta" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="tbRepartidor">
           <Key>
@@ -149,7 +150,7 @@ advertencia 6002: La tabla o vista 'ServicioDeEntregas.dbo.tbFacturas_Recibos' n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbEntregas_tbEstados">
-          <End Role="tbEstados" Type="Self.tbEstados" Multiplicity="0..1" />
+          <End Role="tbEstados" Type="Self.tbEstados" Multiplicity="1" />
           <End Role="tbEntregas" Type="Self.tbEntregas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbEstados">
@@ -161,7 +162,7 @@ advertencia 6002: La tabla o vista 'ServicioDeEntregas.dbo.tbFacturas_Recibos' n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbEntregas_tbRepartidor">
-          <End Role="tbRepartidor" Type="Self.tbRepartidor" Multiplicity="1" />
+          <End Role="tbRepartidor" Type="Self.tbRepartidor" Multiplicity="0..1" />
           <End Role="tbEntregas" Type="Self.tbEntregas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbRepartidor">
@@ -350,13 +351,14 @@ FROM [dbo].[tbFacturas_Recibos] AS [tbFacturas_Recibos]</DefiningQuery>
           <Key>
             <PropertyRef Name="idOrden" />
           </Key>
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <Property Name="idRepartidor" Type="Int32" Nullable="false" />
           <Property Name="idOrden" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Int32" />
-          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idRepartidor" Type="Int32" />
+          <Property Name="NombreConsumidor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionConsumidor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="TelefonoConsumidor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbClientes" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbClientes" FromRole="tbEntregas" ToRole="tbClientes" />
           <NavigationProperty Name="tbEstados" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbEstados" FromRole="tbEntregas" ToRole="tbEstados" />
           <NavigationProperty Name="tbRepartidor" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbRepartidor" FromRole="tbEntregas" ToRole="tbRepartidor" />
@@ -373,13 +375,13 @@ FROM [dbo].[tbFacturas_Recibos] AS [tbFacturas_Recibos]</DefiningQuery>
           <Key>
             <PropertyRef Name="IdTransaccion" />
           </Key>
-          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idCliente" Type="Int32" Nullable="false" />
           <Property Name="idcontrato" Type="Int32" Nullable="false" />
           <Property Name="Monto" Type="Int32" />
           <Property Name="Vigencia" Type="DateTime" Precision="0" />
-          <Property Name="NumTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Tipotarjeta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumTarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipotarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbContrato" Relationship="ServicioDeEntregasModel.FK_tbPagos_tbContrato" FromRole="tbPagos" ToRole="tbContrato" />
           <NavigationProperty Name="tbFacturas_Recibos" Relationship="ServicioDeEntregasModel.FK_tbFacturas_Recibos_tbPagos" FromRole="tbPagos" ToRole="tbFacturas_Recibos" />
         </EntityType>
@@ -487,7 +489,7 @@ FROM [dbo].[tbFacturas_Recibos] AS [tbFacturas_Recibos]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbEntregas_tbEstados">
-          <End Type="ServicioDeEntregasModel.tbEstados" Role="tbEstados" Multiplicity="0..1" />
+          <End Type="ServicioDeEntregasModel.tbEstados" Role="tbEstados" Multiplicity="1" />
           <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbEstados">
@@ -499,7 +501,7 @@ FROM [dbo].[tbFacturas_Recibos] AS [tbFacturas_Recibos]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbEntregas_tbRepartidor">
-          <End Type="ServicioDeEntregasModel.tbRepartidor" Role="tbRepartidor" Multiplicity="1" />
+          <End Type="ServicioDeEntregasModel.tbRepartidor" Role="tbRepartidor" Multiplicity="0..1" />
           <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbRepartidor">
@@ -570,13 +572,14 @@ FROM [dbo].[tbFacturas_Recibos] AS [tbFacturas_Recibos]</DefiningQuery>
           <EntitySetMapping Name="tbEntregas">
             <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbEntregas">
               <MappingFragment StoreEntitySet="tbEntregas">
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TelefonoConsumidor" ColumnName="TelefonoConsumidor" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+                <ScalarProperty Name="DireccionConsumidor" ColumnName="DireccionConsumidor" />
+                <ScalarProperty Name="NombreConsumidor" ColumnName="NombreConsumidor" />
                 <ScalarProperty Name="idRepartidor" ColumnName="idRepartidor" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idOrden" ColumnName="idOrden" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

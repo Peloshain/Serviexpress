@@ -39,9 +39,7 @@ namespace ServiExpress.Controllers
             contrato.idCliente = ClienteServicio.ObtenerPorCorreo(HttpContext.User.Identity.Name).IdCliente;
             contrato.IdContrato = ContratoServicio.ObtenerContrato(Convert.ToInt32(contrato.idCliente)).IdContrato;
             contrato.Monto = PagoServicio.MontoMensual(contrato.IdContrato).Monto;
-
             ViewBag.Contrato = contrato;
-
             return View();
         }
 

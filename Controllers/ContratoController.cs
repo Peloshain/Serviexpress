@@ -83,7 +83,6 @@ namespace ServiExpress.Controllers
             ViewBag.TipoContrato = new SelectList(TipoContratoServicio.ObtenerLista(), "IdTipoContrato", "IdTipoContrato", "");
             ViewBag.UlTipoContrato = TipoContratoServicio.ObtenerLista();
             return View(contrato);
-
         }
 
         //

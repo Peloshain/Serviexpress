@@ -14,13 +14,14 @@ namespace ServiExpress.Models
     
     public partial class tbEntregas
     {
-        public int idCliente { get; set; }
-        public int idRepartidor { get; set; }
         public int idOrden { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion { get; set; }
-        public Nullable<int> Estado { get; set; }
-        public string Telefono { get; set; }
+        public int idCliente { get; set; }
+        public Nullable<int> idRepartidor { get; set; }
+        public string NombreConsumidor { get; set; }
+        public string DireccionConsumidor { get; set; }
+        public int Estado { get; set; }
+        public string TelefonoConsumidor { get; set; }
+        public string Descripcion { get; set; }
     
         public virtual tbClientes tbClientes { get; set; }
         public virtual tbEstados tbEstados { get; set; }

@@ -17,6 +17,7 @@ namespace ServiExpress.Servicios
             return (from t in db.tbTipoContrato where t.IdTipoContrato == id select t).FirstOrDefault();
         }
 
+
         public List<tbTipoContrato> ObtenerLista()
         {
             return (from t in db.tbTipoContrato select t).ToList();

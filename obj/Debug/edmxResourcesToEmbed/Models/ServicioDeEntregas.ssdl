@@ -61,13 +61,13 @@ advertencia 6002: La tabla o vista 'ServicioDeEntregas.dbo.tbFacturas_Recibos' n
     <Key>
       <PropertyRef Name="IdTransaccion" />
     </Key>
-    <Property Name="IdTransaccion" Type="int" Nullable="false" />
+    <Property Name="IdTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idCliente" Type="int" Nullable="false" />
     <Property Name="idcontrato" Type="int" Nullable="false" />
     <Property Name="Monto" Type="int" />
     <Property Name="Vigencia" Type="date" />
-    <Property Name="NumTarjeta" Type="varchar" MaxLength="20" />
-    <Property Name="Tipotarjeta" Type="varchar" MaxLength="10" />
+    <Property Name="NumTarjeta" Type="varchar" MaxLength="50" />
+    <Property Name="Tipotarjeta" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="tbRepartidor">
     <Key>

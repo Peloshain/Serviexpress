@@ -105,13 +105,13 @@
     <Key>
       <PropertyRef Name="IdTransaccion" />
     </Key>
-    <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+    <Property Name="IdTransaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idCliente" Type="Int32" Nullable="false" />
     <Property Name="idcontrato" Type="Int32" Nullable="false" />
     <Property Name="Monto" Type="Int32" />
     <Property Name="Vigencia" Type="DateTime" Precision="0" />
-    <Property Name="NumTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Tipotarjeta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NumTarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Tipotarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tbContrato" Relationship="ServicioDeEntregasModel.FK_tbPagos_tbContrato" FromRole="tbPagos" ToRole="tbContrato" />
     <NavigationProperty Name="tbFacturas_Recibos" Relationship="ServicioDeEntregasModel.FK_tbFacturas_Recibos_tbPagos" FromRole="tbPagos" ToRole="tbFacturas_Recibos" />
   </EntityType>

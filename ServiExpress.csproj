@@ -193,6 +193,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ContratoController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
+    <Compile Include="Controllers\EntregaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Servicios\CustomRoleProvider.cs" />
     <Compile Include="Servicios\PagoServicio.cs" />
     <Compile Include="Servicios\RepartidorServicio.cs" />
+    <Compile Include="Servicios\RolServicio.cs" />
     <Compile Include="Servicios\TipoContratoServicio.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +389,7 @@
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Contrato\Create.cshtml" />
     <Content Include="Views\Pago\Create.cshtml" />
+    <Content Include="Views\Entrega\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

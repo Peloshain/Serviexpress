@@ -2,11 +2,26 @@
 @using ServiExpress.Servicios;
 @using ServiExpress.Models;
 @{
-    ClienteServicio ClienteServicio = new ClienteServicio(); 
-    if (Request.IsAuthenticated)
+    ClienteServicio ClienteServicio = new ClienteServicio();
+    RepartidorServicio RepartidorServicio = new RepartidorServicio();
+    RolServicio Rolservicio = new RolServicio();
+    if(Request.IsAuthenticated)
     {
-        Session["Rol"] = ClienteServicio.ObtenerPorCorreo(User.Identity.Name).tbRoles.Nombre;
+        var c = ClienteServicio.ObtenerPorCorreo(User.Identity.Name);
+    if (c != null)
+    {   
+    int rol = ClienteServicio.ObtenerPorCorreo(User.Identity.Name).tbRoles.idRol;
+    Session["Rol"] = Rolservicio.ObtenerRol(rol).Nombre;
     }
+    var r = RepartidorServicio.ObtenerPorCorreo(User.Identity.Name);
+        if(r!=null)
+        {
+            int rol = RepartidorServicio.ObtenerPorCorreo(User.Identity.Name).tbRoles.idRol;
+            Session["Rol"] = Rolservicio.ObtenerRol(rol).Nombre;
+
+        }
+    }
+   
 }
 <!DOCTYPE html>
 <html lang="es">
