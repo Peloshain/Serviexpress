@@ -1,13 +1,21 @@
-﻿using System;
+﻿using ServiExpress.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiExpress.Servicios;
 
 namespace ServiExpress.Controllers
 {
     public class EntregaController : Controller
     {
+        ServicioDeEntregasEntities db = new ServicioDeEntregasEntities();
+        ClienteServicio ClienteServicio = new ClienteServicio();
+        RepartidorServicio RepartidorServicio = new RepartidorServicio();
+        EntregaServicio EntregaServicio = new EntregaServicio();
         //
         // GET: /Entrega/
 
@@ -36,18 +44,12 @@ namespace ServiExpress.Controllers
         // POST: /Entrega/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(tbEntregas collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            collection.idCliente = ClienteServicio.ObtenerPorCorreo(HttpContext.User.Identity.Name).IdCliente;
+            EntregaServicio.Crear(collection);
+            return View("../Cliente/Index");
+               
         }
 
         //

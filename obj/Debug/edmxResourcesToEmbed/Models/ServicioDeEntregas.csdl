@@ -82,13 +82,14 @@
     <Key>
       <PropertyRef Name="idOrden" />
     </Key>
-    <Property Name="idCliente" Type="Int32" Nullable="false" />
-    <Property Name="idRepartidor" Type="Int32" Nullable="false" />
     <Property Name="idOrden" Type="Int32" Nullable="false" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Estado" Type="Int32" />
-    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="idRepartidor" Type="Int32" />
+    <Property Name="NombreConsumidor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DireccionConsumidor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="Int32" Nullable="false" />
+    <Property Name="TelefonoConsumidor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tbClientes" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbClientes" FromRole="tbEntregas" ToRole="tbClientes" />
     <NavigationProperty Name="tbEstados" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbEstados" FromRole="tbEntregas" ToRole="tbEstados" />
     <NavigationProperty Name="tbRepartidor" Relationship="ServicioDeEntregasModel.FK_tbEntregas_tbRepartidor" FromRole="tbEntregas" ToRole="tbRepartidor" />
@@ -219,7 +220,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_tbEntregas_tbEstados">
-    <End Type="ServicioDeEntregasModel.tbEstados" Role="tbEstados" Multiplicity="0..1" />
+    <End Type="ServicioDeEntregasModel.tbEstados" Role="tbEstados" Multiplicity="1" />
     <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tbEstados">
@@ -231,7 +232,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_tbEntregas_tbRepartidor">
-    <End Type="ServicioDeEntregasModel.tbRepartidor" Role="tbRepartidor" Multiplicity="1" />
+    <End Type="ServicioDeEntregasModel.tbRepartidor" Role="tbRepartidor" Multiplicity="0..1" />
     <End Type="ServicioDeEntregasModel.tbEntregas" Role="tbEntregas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tbRepartidor">

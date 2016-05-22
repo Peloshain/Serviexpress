@@ -1,5 +1,43 @@
-﻿@{
+﻿@model ServiExpress.Models.tbEntregas
+@{
     ViewBag.Title = "Create";
 }
 
-<h1>holis</h1>
+@using (Html.BeginForm("Create", "Entrega", FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <div class="editor-field input-field">
+    @Html.Label("Numero de Orden")
+    @Html.TextBoxFor(model => model.idOrden)
+    @Html.ValidationMessageFor(model => model.idOrden)
+    </div>
+    <div class="editor-field input-field">
+    @Html.Label("Nombre del consumidor")
+    @Html.TextBoxFor(model => model.NombreConsumidor)
+    @Html.ValidationMessageFor(model => model.NombreConsumidor)
+    </div>
+    <div class="editor-field input-field">
+    @Html.Label("Descripcion de orden")
+    @Html.TextBoxFor(model => model.Descripcion)
+    @Html.ValidationMessageFor(model => model.Descripcion)
+    </div>
+    <div class="editor-field input-field">
+    @Html.Label("Telefono del consumidor")
+    @Html.TextBoxFor(model => model.TelefonoConsumidor)
+    @Html.ValidationMessageFor(model => model.TelefonoConsumidor)
+    </div>
+    <div class="editor-field input-field">
+    @Html.Label("Direccion del consumidor")
+    @Html.TextBoxFor(model => model.DireccionConsumidor)
+    @Html.ValidationMessageFor(model => model.DireccionConsumidor)
+    </div>
+    <div class="editor-field input-field">
+    @Html.Label("Estado de entrega")
+    @Html.TextBoxFor(model => model.Estado)
+    @Html.ValidationMessageFor(model => model.Estado)
+    </div>
+    
+    <input type="submit" value="Hacer pedido de entrega" />
+}

@@ -31,13 +31,14 @@
     <EntitySetMapping Name="tbEntregas">
       <EntityTypeMapping TypeName="ServicioDeEntregasModel.tbEntregas">
         <MappingFragment StoreEntitySet="tbEntregas">
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="TelefonoConsumidor" ColumnName="TelefonoConsumidor" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="DireccionConsumidor" ColumnName="DireccionConsumidor" />
+          <ScalarProperty Name="NombreConsumidor" ColumnName="NombreConsumidor" />
           <ScalarProperty Name="idRepartidor" ColumnName="idRepartidor" />
           <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

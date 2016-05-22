@@ -248,6 +248,7 @@
     <Compile Include="Servicios\ClienteServicio.cs" />
     <Compile Include="Servicios\ContratoServicio.cs" />
     <Compile Include="Servicios\CustomRoleProvider.cs" />
+    <Compile Include="Servicios\EntregaServicio.cs" />
     <Compile Include="Servicios\PagoServicio.cs" />
     <Compile Include="Servicios\RepartidorServicio.cs" />
     <Compile Include="Servicios\RolServicio.cs" />
