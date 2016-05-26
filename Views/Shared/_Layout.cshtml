@@ -97,7 +97,7 @@
                                           @Html.ActionLink("Administrar", "Index", "Cliente", null, new { @class = "waves-effect waves-light" })
                                       </li>
                                       <li>
-                                          <a class="waves-effect waves-light " href="#">Monitoreo</a>
+                                          @Html.ActionLink("Monitoreo", "Monitoreo", "Entrega", new { id = ClienteServicio.ObtenerPorCorreo(User.Identity.Name).IdCliente }, new { @class = "waves-effect waves-light" })
                                       </li>
                                       <li>
                                           @Html.ActionLink("Solicitar entrega", "Create", "Entrega", null, new { @class = "waves-effect waves-light" })
@@ -113,7 +113,7 @@
                                           @Html.ActionLink("Administrar", "Index", "Cliente", null, new { @class = "waves-effect waves-light" })
                                       </li>
                                       <li>
-                                          <a class="waves-effect waves-light " href="#">Monitoreo</a>
+                                          @Html.ActionLink("Monitoreo", "Monitoreo", "Entrega", new { id = ClienteServicio.ObtenerPorCorreo(User.Identity.Name).IdCliente }, new { @class = "waves-effect waves-light" })
                                       </li>
                                       <li>
                                           @Html.ActionLink("Solicitar entrega", "Create", "Entrega", null, new { @class = "waves-effect waves-light" })

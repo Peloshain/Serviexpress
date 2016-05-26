@@ -15,7 +15,7 @@
 
 <div class="editor-field input-field">
     @Html.Label("Contrato")
-    <input type="text" value="@contrato.IdContrato" disabled />
+    <input type="text" id="monto" value="@contrato.IdContrato" disabled />
     <input type="hidden" value="@contrato.IdContrato" />
 </div>
 
@@ -33,7 +33,7 @@
     
     <div class="editor-field input-field">
     <label>Codigo de seguridad</label>
-    <input type="text"/>
+        <input type="text" id="codigoSeguridad" />
     </div>
 
 <div class="editor-field input-field">
@@ -49,8 +49,106 @@
 </div>
 
 <input type="submit" value="Guardar y continuar" />
+    <input type="button"onclick="ENVR()" class="btn" value="q" />
+    <input type="button"onclick="Enviar()" class="btn" value="52698" />
 @*<label>@contrato.IdContrato</label>
 <label>@contrato.Monto</label>
 <input type="text" value="@contrato.Monto" disabled/>
 <input type="hidden" value="@contrato.Monto"/>*@
+    
+    
+    
+    
+    
 }
+
+<script>
+    var uri = 'http://189.170.144.90:8080/api/Transaction';
+
+
+    function ENVR() {
+        Pago = new Object();
+        Pago.CardNumber = "7756677302821879";
+        Pago.ExpirationDate= "05/19";
+        Pago.SecurityCode= "751";
+        Pago.Token = "7e9240a4-ad52-4b8d-bee8-412c70610ddf";
+        Pago.Amount= 10;
+        var PagoJSON = JSON.stringify(Pago);
+        $.ajax({
+        url: uri,
+        type: 'POST',
+        data: PagoJSON,
+        contentType: "application/json;charset=utf-8",
+        success: function (response) {
+        },
+        error: function () {
+            alert('Ha ocurrido un error, por favor re intente.');
+        }
+    });
+    }
+
+    @*function Enviar() {
+        $.ajax({
+            url: '@Url.Action("Envio", "Pago")',
+            dataType: "json",
+            data: {
+                CardNumber: "7756677302821879",
+                ExpirationDate: "05/19",
+                SecurityCode: "751",
+                Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
+                Amount: 10
+           //CardNumber: $('#NumTarjeta').val(),
+                //ExpirationDate: $('#Vigencia').val(),
+                //SecurityCode: $('#codigoSeguridad').val(),
+                //Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
+                //Amount: $('#monto').val()
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                alert(data);
+            },
+            error: function (error) {
+                alert(error.responseText);
+            }
+        });
+    }*@
+
+
+
+    //var uri = 'http://localhost:65148/api/Persona';
+
+
+    //function Enviar() {
+    //    persona = new Object();
+
+    //    persona.Nombres = "Pendejito";
+    //    persona.Apellidos ="El Jhael";
+    //    persona.PagoNeto = 1;
+    //    persona.Salario = 1;
+    //    persona.FechaPago = 1;
+    //    persona.ValorComisiones = 1;
+    //    persona.ValorSalud = 156;
+    //    persona.ValorPension = 256;
+    //    persona.PagoNeto = 500;
+
+    //    var personaJSON = JSON.stringify(persona);
+
+    //    $.ajax({
+    //        url: uri,
+    //        type: 'POST',
+    //        data: personaJSON,
+    //        contentType: "application/json;charset=utf-8",
+    //        success: function (response) {
+
+    //        },
+    //        error: function () {
+    //            alert('Ha ocurrido un error, por favor re intente.');
+    //        }
+    //    });
+    //}
+
+</script>
+
+
+

@@ -9,12 +9,12 @@
         @Html.ActionLink("Contrato", "Create", "Contrato", null, new { @class = "waves-effect waves-light btn-large" })
     </div>
     <div class="row">
-        <a class="waves-effect waves-light btn-large disabled"><i class="material-icons left">cloud</i>Modificar</a>
-        @*@Html.ActionLink("Modificar", "Edit", "Cliente", new { id = Model.IdCliente }, new { @class = "waves-effect waves-light btn-large" } )*@
+        @*<a class="waves-effect waves-light btn-large disabled"><i class="material-icons left">cloud</i>Modificar</a>*@
+        @Html.ActionLink("Modificar", "Edit", "Cliente", new { id = Model.IdCliente }, new { @class = "waves-effect waves-light btn-large" } )
     </div>
-    <div class="row">
-        @*<a class="waves-effect waves-light btn-large disabled"><i class="material-icons left">cloud</i>Pago</a>*@
+    @*<div class="row">
+        @*<a class="waves-effect waves-light btn-large disabled"><i class="material-icons left">cloud</i>Pago</a>
         @Html.ActionLink("Pago", "Create", "Pago", null, new { @class = "waves-effect waves-light btn-large" })
 
-    </div>
+    </div>*@
 </form>

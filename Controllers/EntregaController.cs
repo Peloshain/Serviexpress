@@ -18,7 +18,18 @@ namespace ServiExpress.Controllers
         EntregaServicio EntregaServicio = new EntregaServicio();
         //
         // GET: /Entrega/
-
+        public ActionResult ObtenerEntrega(string term)
+        {
+            var model = EntregaServicio.ObtenerPorOrden(Convert.ToInt32(term));
+            
+            var objentrega = new tbEntregas();
+            objentrega.NombreConsumidor = model.NombreConsumidor;
+            objentrega.Descripcion = model.Descripcion;
+            objentrega.TelefonoConsumidor = model.TelefonoConsumidor;
+            objentrega.Estado = model.Estado;
+         
+            return Json(objentrega, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Index()
         {
             return View();
@@ -27,9 +38,13 @@ namespace ServiExpress.Controllers
         //
         // GET: /Entrega/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult Monitoreo(int id)
         {
-            return View();
+            ViewBag.Orden = new SelectList(EntregaServicio.ObtenerLista(), "IdOrden", "IdOrden", "");
+            tbEntregas entregas= new tbEntregas();
+            entregas = EntregaServicio.ObtenerOrdenPorIdCliente(id);
+
+            return View(entregas);
         }
 
         //

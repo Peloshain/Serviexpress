@@ -33,6 +33,26 @@ namespace ServiExpress.Servicios
             return cliente;
         }
 
+        public string Editar(tbClientes editcliente)
+        {
+            try{
+                if (db != null)
+                {
+                db.Dispose();
+
+                db = new ServicioDeEntregasEntities();
+                editcliente.ROL = 1;
+                db.tbClientes.Attach(editcliente);
+                db.Entry(editcliente).State = EntityState.Modified;
+                db.SaveChanges();
+                }
+                return "";
+            }
+            catch(Exception ex)
+            {
+               return ex.Message;
+            }
+        }
     
         public string Crear(tbClientes cliente)
         {

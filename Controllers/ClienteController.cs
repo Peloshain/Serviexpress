@@ -69,31 +69,10 @@ namespace ServiExpress.Controllers
         [HttpPost]
         public ActionResult Edit(int id, tbClientes collection)
         {
+            ClienteServicio.Editar(collection);
+                return View("../Cliente/Index");
 
-            try
-            {
-                if (db != null)
 
-                db.Dispose();
-                db.tbClientes.Attach(collection);
-                db.Entry(collection).State = EntityState.Modified;
-                db.SaveChanges();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("../Cliente/Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         //

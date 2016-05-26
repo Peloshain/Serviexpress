@@ -1,4 +1,10 @@
 ﻿@model ServiExpress.Models.tbContrato
+           @using ServiExpress.Servicios;
+@using ServiExpress.Models;
+@{
+    ClienteServicio clienteservicio = new ClienteServicio();
+    string nombre = clienteservicio.ObtenerPorCorreo(User.Identity.Name).Nombre;
+}
 
 @{
     ViewBag.Title = "Create";
@@ -14,7 +20,10 @@
 
 
         <div class="modal-content input-field">
-
+            <div class="editor-field input-field">
+                <input type="text" id="monto" value="@nombre" disabled />
+                <input type="hidden" value="@nombre" />
+            </div>
 
             <div class="input-field col s12">
 
@@ -22,15 +31,15 @@
                 @Html.Label("Tipo de contrato")
                 @Html.ValidationMessageFor(model => model.tbTipoContrato)
             </div>
-            <div class="editor-field input-field">
+            @*<div class="editor-field input-field">
                 @Html.Label("Descripcion")
-            </div>
+            </div>*@
             <div class="editor-field input-field" id="disabled">
                 @Html.TextArea("Descripcion")
             </div>
-            <div class="editor-field input-field">
+            @*<div class="editor-field input-field">
                 @Html.Label("Monto a pagar")
-            </div>
+            </div>*@
             <div class="editor-field input-field">
                 @Html.TextArea("MontoMensual")
             </div>
@@ -48,7 +57,7 @@
             </div>
 
 
-                <input type="submit" value="Create" />
+                <input type="submit" value="Guardar y continuar" />
             </div>
 
 

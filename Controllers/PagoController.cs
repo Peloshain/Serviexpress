@@ -5,6 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using ServiExpress.Servicios;
 using ServiExpress.Models;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.Net;
+using System.IO; 
 
 namespace ServiExpress.Controllers
 {
@@ -16,6 +21,47 @@ namespace ServiExpress.Controllers
         ClienteServicio ClienteServicio = new ClienteServicio();
         PagoServicio PagoServicio = new PagoServicio();
         // GET: /Pago/
+
+        WebResponse response;
+        public async Task<bool> Envio(string CardNumber, string ExpirationDate, string SecurityCode, string Token, int Amount)
+        {
+            Pago pago = new Pago();
+            var request = (HttpWebRequest)WebRequest.Create("http://189.170.144.90:8080/api/Transaction");
+
+            pago.CardNumber = CardNumber;
+            pago.ExpirationDate = ExpirationDate;
+            pago.SecurityCode = SecurityCode;
+            pago.Token = Token;
+            pago.Amount = Amount;
+
+            var userData = new JavaScriptSerializer().Serialize(pago);
+            var data = Encoding.ASCII.GetBytes(userData);
+
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.ContentLength = data.Length;
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
+            try
+            {
+                response = request.GetResponse();
+                Stream datastream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(datastream);
+                String responseFromServer = reader.ReadToEnd();
+                //return Json("listo", JsonRequestBehavior.AllowGet);
+                return true;
+            }
+            catch (System.Net.WebException ex)
+            {
+                //return Json("mal", JsonRequestBehavior.AllowGet); ;
+                return false;
+            }
+
+        }
 
         public ActionResult Index()
         {

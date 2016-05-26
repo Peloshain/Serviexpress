@@ -24,6 +24,7 @@ namespace ServiExpress.Controllers
             var tipoContrato = new tbTipoContrato();
             tipoContrato.Descripcion = model.Descripcion;
             tipoContrato.MontoMensual = model.MontoMensual;
+            
             return Json(tipoContrato, JsonRequestBehavior.AllowGet);
         }
 
@@ -95,8 +96,9 @@ namespace ServiExpress.Controllers
             collection.idCliente = ClienteServicio.ObtenerPorCorreo(HttpContext.User.Identity.Name).IdCliente;
             ViewBag.TipoContrato = new SelectList(TipoContratoServicio.ObtenerLista(), "IdTipoContrato", "IdTipoContrato", collection.tipo);
             collection.Monto = TipoContratoServicio.ObtenerMontoMensual(Convert.ToInt32(collection.tipo)).MontoMensual;
+            ViewBag.Contrato = collection;
             ContratoServicio.Crear(collection);
-            return View("../Cliente/Index");
+            return View("../Pago/Create");
         }
 
         //

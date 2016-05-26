@@ -201,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\ServicioDeEntregas.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -391,6 +392,7 @@
     <Content Include="Views\Contrato\Create.cshtml" />
     <Content Include="Views\Pago\Create.cshtml" />
     <Content Include="Views\Entrega\Create.cshtml" />
+    <Content Include="Views\Entrega\Monitoreo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
