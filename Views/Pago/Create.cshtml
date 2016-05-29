@@ -50,7 +50,7 @@
 
 <input type="submit" onclick="Enviar()"value="Guardar y continuar" />
     <input type="button"onclick="ENVR()" class="btn" value="q" />
-    <input type="button"onclick="Enviar()" class="btn" value="52698" />
+    <input type="button"onclick="Envia()" class="btn" value="52698" />
 @*<label>@contrato.IdContrato</label>   
 <label>@contrato.Monto</label>
 <input type="text" value="@contrato.Monto" disabled/>
@@ -63,37 +63,37 @@
 }
 
 <script>
-    var uri = 'http://192.168.1.192:8080/api/Transaction ';
+    //var uri = 'http://192.168.1.192:8080/api/Transaction ';
 
 
-    function ENVR() {
-    //    //Pago = new Object();
-    //    //Pago.CardNumber = "7756677302821879";
-    //    //Pago.ExpirationDate= "05/19";
-    //    //Pago.SecurityCode= "751";
-    //    //Pago.Token = "7e9240a4-ad52-4b8d-bee8-412c70610ddf";
-    //    //Pago.Amount= 10;
-    //    //var PagoJSON = JSON.stringify(Pago);
-        $.ajax({
-        url: uri,
-        type: 'POST',
-        //data: PagoJSON,
-        data: {
-            CardNumber: "0910476627337329",
-            ExpirationDate: "05/19",
-            SecurityCode: "80",
-            Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
-            Amount: 10
-        },
+    //function ENVR() {
+    ////    //Pago = new Object();
+    ////    //Pago.CardNumber = "7756677302821879";
+    ////    //Pago.ExpirationDate= "05/19";
+    ////    //Pago.SecurityCode= "751";
+    ////    //Pago.Token = "7e9240a4-ad52-4b8d-bee8-412c70610ddf";
+    ////    //Pago.Amount= 10;
+    ////    //var PagoJSON = JSON.stringify(Pago);
+    //    $.ajax({
+    //    url: uri,
+    //    type: 'POST',
+    //    //data: PagoJSON,
+    //    data: {
+    //        CardNumber: "0910476627337329",
+    //        ExpirationDate: "05/19",
+    //        SecurityCode: "80",
+    //        Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
+    //        Amount: 10
+    //    },
 
-        contentType: "application/json;charset=utf-8",
-        success: function (response) {
-        },
-        error: function () {
-            alert('Ha ocurrido un error, por favor re intente.');
-        }
-    });
-    }
+    //    contentType: "application/json;charset=utf-8",
+    //    success: function (response) {
+    //    },
+    //    error: function () {
+    //        alert('Ha ocurrido un error, por favor re intente.');
+    //    }
+    //});
+    //}
 
     function Enviar() {
         $.ajax({
@@ -123,11 +123,41 @@
     }
 
 
+    var uri = ' http://localhost:60093/api/Entregas';
+
+    function ENVR() {
+        orden = new Object();
+
+        orden.IdOrden = 32564;
+        orden.idCliente = 1;
+        orden.NombreConsumidor = "Pedrito";
+        orden.DireccionConsumidor = "casita";
+        orden.Descripcion = "bien gueno";
+        orden.TelefonoConsumidor = 6624896;
+        orden.Estado = 1;
+
+
+        var ordenJSON = JSON.stringify(orden);
+
+        $.ajax({
+            url: uri,
+            type: 'POST',
+            data: ordenJSON,
+            contentType: "application/json;charset=utf-8",
+            success: function (response) {
+            },
+            error: function () {
+                alert('Ha ocurrido un error, por favor re intente.');
+            }
+        });
+    }
+
+
 
     //var uri = 'http://localhost:65148/api/Persona';
 
 
-    //function Enviar() {
+    //function Envia() {
     //    persona = new Object();
 
     //    persona.Nombres = "Pendejito";
