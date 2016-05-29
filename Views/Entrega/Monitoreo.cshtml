@@ -1,0 +1,82 @@
+﻿@model ServiExpress.Models.tbEntregas
+@{
+    ViewBag.Title = "Monitoreo";
+}
+
+
+@*<div class="editor-field input-field">
+    @Html.Label("Numero de Orden")
+    @Html.TextBoxFor(model => model.idOrden, new {@disabled ="disabled" })
+    @Html.ValidationMessageFor(model => model.idOrden)
+</div>*@
+
+<div class="input-field col s12">
+
+    @Html.DropDownListFor(model => model.idOrden, (SelectList)ViewBag.Orden, "Orden", new { @class = "initialized tipo element-required" })
+    @Html.Label("Orden")
+    @Html.ValidationMessageFor(model => model.idOrden)
+</div>
+
+<div class="editor-field input-field">
+    @Html.Label("Nombre del consumidor")
+    @Html.TextBoxFor(model => model.NombreConsumidor, new { @disabled = "disabled" })
+    @Html.ValidationMessageFor(model => model.NombreConsumidor)
+</div>
+<div class="editor-field input-field">
+    @Html.Label("Descripcion de orden")
+    @Html.TextBoxFor(model => model.Descripcion, new { @disabled = "disabled" })
+    @Html.ValidationMessageFor(model => model.Descripcion)
+</div>
+<div class="editor-field input-field">
+    @Html.Label("Telefono del consumidor")
+    @Html.TextBoxFor(model => model.TelefonoConsumidor, new { @disabled = "disabled" })
+    @Html.ValidationMessageFor(model => model.TelefonoConsumidor)
+</div>
+<div class="editor-field input-field">
+    @Html.Label("Direccion del consumidor")
+    @Html.TextBoxFor(model => model.DireccionConsumidor, new { @disabled = "disabled" })
+    @Html.ValidationMessageFor(model => model.DireccionConsumidor)
+</div>
+<div class="editor-field input-field">
+    @Html.Label("Estado de entrega")
+    @Html.TextBoxFor(model => model.tbEstados.Descripcion, new { @disabled = "disabled" })
+    @Html.ValidationMessageFor(model => model.Estado)
+</div>
+    
+<script>
+    $(document).ready(function () {
+        $('#idOrden').material_select();
+        $(".idOrden").children("input").attr("name", "tipos");
+        $(".idOrden").children("input").attr("id", "tipos");
+    });
+
+    $("#idOrden").change(function () {
+            
+        if ($(this).val().length > 0) {
+            $.ajax({
+                url: '@Url.Action("ObtenerEntrega", "Entrega")',
+                dataType: "json",
+                data: {
+                    term: $('#idOrden').val()
+                },
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#NombreConsumidor").val(data.NombreConsumidor);
+                    $("#Descripcion").val(data.Descripcion);
+                    $("#TelefonoConsumidor").val(data.TelefonoConsumidor);
+                    $("#Estado").val(data.Estado);
+                    //alert(data.Descripcion+ " "+ data.MontoMensual)
+                },
+                error: function (error) {
+                    alert(error.responseText);
+                }
+            });
+        }else{
+            $("#NombreConsumidor").val("");
+            $("#Descripcion").val("");
+            $("#TelefonoConsumidor").val("");
+            $("#Estado").val("");
+        }
+    });
+    
+</script>
