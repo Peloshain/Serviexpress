@@ -48,10 +48,10 @@
     @Html.ValidationMessageFor(model => model.Vigencia)
 </div>
 
-<input type="submit" value="Guardar y continuar" />
+<input type="submit" onclick="Enviar()"value="Guardar y continuar" />
     <input type="button"onclick="ENVR()" class="btn" value="q" />
     <input type="button"onclick="Enviar()" class="btn" value="52698" />
-@*<label>@contrato.IdContrato</label>
+@*<label>@contrato.IdContrato</label>   
 <label>@contrato.Monto</label>
 <input type="text" value="@contrato.Monto" disabled/>
 <input type="hidden" value="@contrato.Monto"/>*@
@@ -63,21 +63,29 @@
 }
 
 <script>
-    var uri = 'http://189.170.144.90:8080/api/Transaction';
+    var uri = 'http://192.168.1.192:8080/api/Transaction ';
 
 
     function ENVR() {
-        Pago = new Object();
-        Pago.CardNumber = "7756677302821879";
-        Pago.ExpirationDate= "05/19";
-        Pago.SecurityCode= "751";
-        Pago.Token = "7e9240a4-ad52-4b8d-bee8-412c70610ddf";
-        Pago.Amount= 10;
-        var PagoJSON = JSON.stringify(Pago);
+    //    //Pago = new Object();
+    //    //Pago.CardNumber = "7756677302821879";
+    //    //Pago.ExpirationDate= "05/19";
+    //    //Pago.SecurityCode= "751";
+    //    //Pago.Token = "7e9240a4-ad52-4b8d-bee8-412c70610ddf";
+    //    //Pago.Amount= 10;
+    //    //var PagoJSON = JSON.stringify(Pago);
         $.ajax({
         url: uri,
         type: 'POST',
-        data: PagoJSON,
+        //data: PagoJSON,
+        data: {
+            CardNumber: "0910476627337329",
+            ExpirationDate: "05/19",
+            SecurityCode: "80",
+            Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
+            Amount: 10
+        },
+
         contentType: "application/json;charset=utf-8",
         success: function (response) {
         },
@@ -87,21 +95,21 @@
     });
     }
 
-    @*function Enviar() {
+    function Enviar() {
         $.ajax({
             url: '@Url.Action("Envio", "Pago")',
             dataType: "json",
             data: {
-                CardNumber: "7756677302821879",
-                ExpirationDate: "05/19",
-                SecurityCode: "751",
+                //CardNumber: "0910476627337329",
+                //ExpirationDate: "05/19",
+                //SecurityCode: "80",
+                //Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
+                //Amount: 10
+                CardNumber: $('#NumTarjeta').val(),
+                ExpirationDate: $('#Vigencia').val(),
+                SecurityCode: $('#codigoSeguridad').val(),
                 Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
                 Amount: 10
-           //CardNumber: $('#NumTarjeta').val(),
-                //ExpirationDate: $('#Vigencia').val(),
-                //SecurityCode: $('#codigoSeguridad').val(),
-                //Token: "7e9240a4-ad52-4b8d-bee8-412c70610ddf",
-                //Amount: $('#monto').val()
 
             },
             contentType: 'application/json; charset=utf-8',
@@ -112,7 +120,7 @@
                 alert(error.responseText);
             }
         });
-    }*@
+    }
 
 
 

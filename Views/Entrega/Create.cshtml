@@ -7,7 +7,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    
+    <div class="row content-wrapper">
     <div class="editor-field input-field">
     @Html.Label("Numero de Orden")
     @Html.TextBoxFor(model => model.idOrden)
@@ -40,4 +40,5 @@
     </div>
     
     <input type="submit" value="Hacer pedido de entrega" />
+        </div>
 }

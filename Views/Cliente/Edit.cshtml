@@ -10,68 +10,64 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+     <div class="row content-wrapper">
+        
+         @*<fieldset>*@
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCliente)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCliente)
-            @Html.ValidationMessageFor(model => model.IdCliente)
-        </div>
+       
+             <div class="editor-field ">
+                 @Html.LabelFor(model => model.IdCliente)
+                 @Html.EditorFor(model => model.IdCliente)
+                 @Html.ValidationMessageFor(model => model.IdCliente)
+             </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nombre)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
-            @Html.ValidationMessageFor(model => model.Nombre)
-        </div>
+             <div class="editor-field ">
+                 @Html.LabelFor(model => model.Nombre)
+                 @Html.EditorFor(model => model.Nombre)
+                 @Html.ValidationMessageFor(model => model.Nombre)
+             </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Telefono)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Telefono)
-            @Html.ValidationMessageFor(model => model.Telefono)
-        </div>
+             <div class="editor-field ">
+                 @Html.LabelFor(model => model.Telefono)
+                 @Html.EditorFor(model => model.Telefono)
+                 @Html.ValidationMessageFor(model => model.Telefono)
+             </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Direccion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Direccion)
-            @Html.ValidationMessageFor(model => model.Direccion)
-        </div>
+             <div class="editor-field ">
+                 @Html.LabelFor(model => model.Direccion)
+                 @Html.EditorFor(model => model.Direccion)
+                 @Html.ValidationMessageFor(model => model.Direccion)
+             </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Correo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Correo)
-            @Html.ValidationMessageFor(model => model.Correo)
-        </div>
+             <div class="editor-field">
+                 @Html.LabelFor(model => model.Correo)
+                 @Html.EditorFor(model => model.Correo)
+                 @Html.ValidationMessageFor(model => model.Correo)
+             </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Contraseña)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Contraseña)
-            @Html.ValidationMessageFor(model => model.Contraseña)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RFC)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.RFC)
-            @Html.ValidationMessageFor(model => model.RFC)
-        </div>
+             <div class="editor-field ">
+                 @Html.LabelFor(model => model.Contraseña)
+                 @Html.EditorFor(model => model.Contraseña)
+                 @Html.ValidationMessageFor(model => model.Contraseña)
+             </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+             <div class="editor-field">
+                 @Html.LabelFor(model => model.RFC)
+                 @Html.EditorFor(model => model.RFC)
+                 @Html.ValidationMessageFor(model => model.RFC)
+             </div>
+
+             <div class="row">
+                 <input type="submit" value="Guardar cambios" class="waves-effect waves-light" />
+                 @*<a class="waves-effect waves-light btn" type="submit" href="#">Guardar</a>*@
+             </div>
+
+
+         @*</fieldset>*@
+         
+       </div>
+    
 }
 
 

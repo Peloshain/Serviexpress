@@ -24,7 +24,7 @@ namespace ServiExpress.Servicios
         {
             try
             {
-
+                
                 db.tbPagos.Attach(pagos);
                 db.Entry(pagos).State = EntityState.Added;
                 db.SaveChanges();

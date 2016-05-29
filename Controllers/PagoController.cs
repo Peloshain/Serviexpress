@@ -26,7 +26,7 @@ namespace ServiExpress.Controllers
         public async Task<bool> Envio(string CardNumber, string ExpirationDate, string SecurityCode, string Token, int Amount)
         {
             Pago pago = new Pago();
-            var request = (HttpWebRequest)WebRequest.Create("http://189.170.144.90:8080/api/Transaction");
+            var request = (HttpWebRequest)WebRequest.Create("http://192.168.1.156:8080/api/Transaction");
 
             pago.CardNumber = CardNumber;
             pago.ExpirationDate = ExpirationDate;
